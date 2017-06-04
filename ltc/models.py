@@ -15,7 +15,7 @@ class Record(models.Model):
         offset = datetime.timedelta(hours=8)
         tz  = datetime.timezone(offset,'Asia/Shanghai')
         date = datetime.datetime.fromtimestamp(self.timestamp,tz)
-        date = date.replace(tzinfo=timezone.utc).astimezone(tz=tz)
+        date = date.replace(tzinfo=datetime.timezone.utc).astimezone(tz=tz)
         return str(date) + '\t' + str(self.price)
 
     @classmethod
