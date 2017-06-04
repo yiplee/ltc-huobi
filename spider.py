@@ -7,19 +7,16 @@ import json
 def get_current_price():
     conn = http.client.HTTPSConnection('api.huobi.com')
     conn.request('GET','/staticmarket/ticker_ltc_json.js')
-    r = conn.getResponse()
+    r = conn.getresponse()
     if r.status == 200 :
         data = r.read()
         string = data.decode('utf8').replace("'", '"')
         json_data = json.loads(string)
-        json = json.dumps(json_data,indent=4, sort_keys=True)
-        print(json)
-        price = json['ticker']['last']
-        date = json['time']
-
+        ticker = json_data['ticker']
+        price = ticker['last']
+        date = json_data['time']
         recod = Record.create(price,date)
         record.save()
-
 
 if __name__ == '__main__':
     get_current_price()
