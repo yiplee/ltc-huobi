@@ -14,7 +14,8 @@ def get_current_price():
         json_data = json.loads(string)
         ticker = json_data['ticker']
         price = ticker['last']
-        date = json_data['time']
+        date = int(json_data['time'])
+        # print(type(date))
         recod = Record.create(price,date)
         record.save()
 
