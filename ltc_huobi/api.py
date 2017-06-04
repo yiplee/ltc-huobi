@@ -9,6 +9,6 @@ def get_ltc_price(request):
     record = Record.objects.latest()
 
     if (record):
-        return HttpResponse(record.dumpJSON())
+        return JsonResponse(record.dumpJSON())
     else:
         return HttpResponse('No Record')
