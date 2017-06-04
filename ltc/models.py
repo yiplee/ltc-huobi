@@ -5,7 +5,7 @@ from django.db import models
 import datetime
 
 class Record(models.Model):
-    price      = models.DecimalField('the price of ltc',decimal_places=2)
+    price      = models.DecimalField('the price of ltc',max_digits=6,decimal_places=2)
     timestamp  = models.IntegerField('date of record')
 
     class Meta:
