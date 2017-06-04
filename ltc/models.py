@@ -12,7 +12,8 @@ class Record(models.Model):
         get_latest_by = 'timestamp'
 
     def __str__(self):
-        date = datetime.datetime.fromtimestamp(self.timestamp)
+        tz  = datetime.timezone('Asia/Shanghai')
+        date = datetime.datetime.fromtimestamp(self.timestamp,tz)
         return str(date) + '\t' + str(self.price)
 
     @classmethod
