@@ -13,7 +13,7 @@ def get_current_price():
         string = data.decode('utf8').replace("'", '"')
         json_data = json.loads(string)
         json = json.dumps(json_data,indent=4, sort_keys=True)
-
+        print(json)
         price = json['ticker']['last']
         date = json['time']
 
