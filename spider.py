@@ -14,5 +14,5 @@ if r.status == 200 :
     ticker = json_data['ticker']
     price = ticker['last']
     date = int(json_data['time'])
-    recod = Record.create(price,date)
+    record = Record.create(price,date)
     record.save()
