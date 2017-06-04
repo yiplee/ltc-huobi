@@ -21,6 +21,7 @@ class Record(models.Model):
         record.save()
         return record
 
+    @staticmethod
     def dumpJSON():
         json = {}
         json['price'] = price
