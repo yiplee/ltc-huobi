@@ -12,7 +12,7 @@ class Record(models.Model):
         get_latest_by = 'timestamp'
 
     def __str__(self):
-        offset = datetime.timedelta(8)
+        offset = datetime.timedelta(hours=8)
         tz  = datetime.timezone(offset,'Asia/Shanghai')
         date = datetime.datetime.fromtimestamp(self.timestamp,tz)
         date = date.replace(tzinfo=timezone.utc).astimezone(tz=tz)
