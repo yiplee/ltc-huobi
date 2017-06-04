@@ -3,7 +3,6 @@
 import http.client
 from ltc.models import Record
 import json
-import os
 
 def get_current_price():
     conn = http.client.HTTPSConnection('api.huobi.com')
@@ -23,5 +22,4 @@ def get_current_price():
 
 
 if __name__ == '__main__':
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ltc_huobi.settings")
     get_current_price()
