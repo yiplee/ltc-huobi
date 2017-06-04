@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from . import api
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^record',api.get_ltc_price),
 ]
