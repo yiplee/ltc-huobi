@@ -12,9 +12,9 @@ class Record(models.Model):
         get_latest_by = 'timestamp'
 
     def __str__(self):
-        offset = datetime.timedelta(hours=0)
+        offset = datetime.timedelta(hours=8)
         tz  = datetime.timezone(offset,'Asia/Shanghai')
-        date = datetime.datetime.fromtimestamp(self.timestamp,tz)
+        date = datetime.datetime.fromtimestamp(self.timestamp)
         date = date.replace(tzinfo=datetime.timezone.utc).astimezone(tz=tz)
         return str(date) + '\t' + str(self.price)
 
