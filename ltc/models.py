@@ -24,6 +24,6 @@ class Record(models.Model):
     @staticmethod
     def dumpJSON():
         json = {}
-        json['price'] = price
-        json['timestamp']  = timestamp
+        json['price'] = self.price
+        json['timestamp']  = self.timestamp
         return json
