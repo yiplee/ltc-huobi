@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['104.160.41.214']
 # Application definition
 
 INSTALLED_APPS = [
-    'ltc.apps.LtcConfig'
+    'ltc'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
