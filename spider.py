@@ -5,9 +5,9 @@ from ltc.models import Record
 import json
 import time
 
-conn = http.client.HTTPSConnection('api.huobi.com')
-conn.request('GET','/staticmarket/ticker_ltc_json.js')
 while True:
+    conn = http.client.HTTPSConnection('api.huobi.com')
+    conn.request('GET','/staticmarket/ticker_ltc_json.js')
     r = conn.getresponse()
     if r.status == 200 :
         data = r.read()
