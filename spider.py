@@ -21,7 +21,7 @@ while True:
         record = None
         try:
             record = Record.objects.get(timestamp=date)
-        except Comment.DoesNotExist:
+        except Record.DoesNotExist:
             record = None
 
         if not record :
