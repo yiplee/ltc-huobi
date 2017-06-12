@@ -17,7 +17,13 @@ while True:
         ticker = json_data['ticker']
         price = ticker['last']
         date = int(json_data['time'])
-        record = Record.objects.get(timestamp=date)
+
+        record = None
+        try:
+            record = Record.objects.get(timestamp=date)
+        except Comment.DoesNotExist:
+            record = None
+
         if not record :
             record = Record.create(price,date)
             record.save()
