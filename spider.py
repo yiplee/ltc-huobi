@@ -13,7 +13,7 @@ while True:
         data = r.read()
         string = data.decode('utf8').replace("'", '"')
         json_data = json.loads(string)
-        print json_data
+        #print json_data
         ticker = json_data['ticker']
         price = ticker['last']
         date = int(json_data['time'])
