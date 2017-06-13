@@ -15,7 +15,6 @@ while True:
             ticker = json_data['ticker']
             price = ticker['last']
             date = int(json_data['time'])
-            print(str(price) + ' ' + str(date))
             try:
                 record = Record.objects.get(timestamp=date)
                 record.count = record.count + 1
