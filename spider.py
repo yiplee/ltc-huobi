@@ -13,18 +13,12 @@ while True:
         data = r.read()
         string = data.decode('utf8').replace("'", '"')
         json_data = json.loads(string)
-        # print(json_data)
         ticker = json_data['ticker']
         price = ticker['last']
         date = int(json_data['time'])
 
-        record = None
-        try:
-            record = Record.objects.get(timestamp=date)
-        except Record.DoesNotExist:
-            record = None
-
-        if not record :
+        latest_record = Record.objects.latest
+        if date > latest_record.timestamp:
             record = Record.create(price,date)
             record.save()
 
