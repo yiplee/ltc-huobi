@@ -23,6 +23,5 @@ while True:
             record.count = record.count + 1
         except Record.DoesNotExist:
             record = Record.create(price,date)
-            record.save()
     conn.close()
     time.sleep(5)
