@@ -21,6 +21,7 @@ while True:
         try:
             record = Record.objects.get(timestamp=date)
             record.count = record.count + 1
+            record.save()
         except Record.DoesNotExist:
             record = Record.create(price,date)
     conn.close()
