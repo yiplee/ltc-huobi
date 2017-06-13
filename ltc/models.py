@@ -7,6 +7,7 @@ import datetime
 class Record(models.Model):
     price      = models.DecimalField('the price of ltc', max_digits=6, decimal_places=2)
     timestamp  = models.IntegerField('date of record', db_index=True)
+    count      = models.IntegerField('fetch times')
 
     class Meta:
         get_latest_by = 'timestamp'
@@ -16,11 +17,14 @@ class Record(models.Model):
         tz  = datetime.timezone(offset,'Asia/Shanghai')
         date = datetime.datetime.fromtimestamp(self.timestamp)
         date = date.replace(tzinfo=datetime.timezone.utc).astimezone(tz=tz)
-        return date.strftime('%y年%m月%d日 %H:%M:%S') + '\t\t' + str(self.price) + '元'
+        desc = date.strftime('%y年%m月%d日 %H:%M:%S') + '   ' + str(self.price)
+        if self.count > 1:
+            desc = desc + '   x' + str(self.count)
+        return desc
 
     @classmethod
     def create(cls, price, timestamp):
-        record = cls(price = price,timestamp = timestamp)
+        record = cls(price = price,timestamp = timestamp,count = 1)
         record.save()
         return record
 
