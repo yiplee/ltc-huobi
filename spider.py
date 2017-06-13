@@ -18,7 +18,7 @@ while True:
         ticker = json_data['ticker']
         price = ticker['last']
         date = int(json_data['time'])
-        latest_record = Record.objects.latest
+        latest_record = Record.objects.latest()
         if not latest_record or date > latest_record.timestamp:
             record = Record.create(price,date)
             record.save()
