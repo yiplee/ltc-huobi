@@ -7,9 +7,10 @@ import time
 
 huobi_api = "http://api.huobi.com/staticmarket/ticker_ltc_json.js"
 headers = {'Content-type': 'application/json', 'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0'}
+session = requests.session()
 while True:
     try:
-        r = requests.get(huobi_api,headers = headers, timeout = 2)
+        r = session.get(huobi_api,headers = headers, timeout = 2)
         if r.status_code == requests.codes.ok:
             json_data = r.json()
             ticker = json_data['ticker']
