@@ -1,28 +1,32 @@
 # -*- coding: utf-8 -*-
 
-import http.client
+import requests
 from ltc.models import Record
 import json
 import time
 
+huobi_api = "http://api.huobi.com/staticmarket/ticker_ltc_json.js"
+headers = {'Content-type': 'application/json', 'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0'}
 while True:
-    conn = http.client.HTTPSConnection('api.huobi.com')
-    body = {}
-    headers = {'Content-type': 'application/json', 'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0'}
-    conn.request('GET','/staticmarket/ticker_ltc_json.js', json.dumps(body),headers)
-    r = conn.getresponse()
-    if r.status == 200 :
-        data = r.read()
-        string = data.decode('utf8').replace("'", '"')
-        json_data = json.loads(string)
-        ticker = json_data['ticker']
-        price = ticker['last']
-        date = int(json_data['time'])
-        try:
-            record = Record.objects.get(timestamp=date)
-            record.count = record.count + 1
-            record.save()
-        except Record.DoesNotExist:
-            record = Record.create(price,date)
-    conn.close()
-    time.sleep(5)
+    try:
+        r = requests.get(huobi_api,headers = headers, timeout = 2)
+        if r.status_code == requests.codes.ok:
+            json_data = r.json()
+            ticker = json_data['ticker']
+            price = ticker['last']
+            date = int(json_data['time'])
+            print(str(price) + ' ' + str(date))
+            try:
+                record = Record.objects.get(timestamp=date)
+                record.count = record.count + 1
+                record.save()
+            except Record.DoesNotExist:
+                record = Record.create(price,date)
+
+            time.sleep(3)
+        else:
+            time.sleep(8)
+    except requests.exceptions.Timeout:
+        continue
+    except requests.exceptions.RequestException:
+        time.sleep(10)
