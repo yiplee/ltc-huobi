@@ -22,8 +22,8 @@ def get_ltc_price(request):
         count = arg.objects()
 
     latest_objects = objects[:count]
-    sum = latest_objects.aggregate(Sum('count'))['count__sum']
-    active = count / sum
+    count_sum = latest_objects.aggregate(Sum('count'))['count__sum']
+    active = count / count_sum
     record = objects.last()
     start = objects.first()
     if (record):
@@ -34,6 +34,7 @@ def get_ltc_price(request):
         # json["today"] = today
         json["open"] = start.price
         json["active"] = active
+        json["sum"] = count_sum
         return JsonResponse(json)
     else:
         return HttpResponse('No Record')
