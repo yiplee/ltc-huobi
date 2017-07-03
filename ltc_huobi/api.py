@@ -13,7 +13,11 @@ from ltc.models import Record
 def get_ltc_price(request):
     record = Record.objects.latest()
 
-    today = time.mktime(datetime.date.today().timetuple())
+    date = datetime.date.today()
+    offset = datetime.timedelta(hours=8)
+    tz  = datetime.timezone(offset,'Asia/Shanghai')
+    date = date.replace(tzinfo=datetime.timezone.utc).astimezone(tz=tz)
+    today = time.mktime(date.timetuple())
     objects = Record.objects.filter(timestamp__gte = today)
     max_price = objects.aggregate(Max('price'))
     min_price = objects.aggregate(Min('price'))
