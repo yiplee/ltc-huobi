@@ -23,7 +23,7 @@ def get_ltc_price(request):
     if objects.count() < count:
         count = objects.count()
 
-    latest_objects = objects[:count]
+    latest_objects = objects[-count:0]
     for item in latest_objects:
         count_sum += item.count
         _list.append(item.dumpJSON())
