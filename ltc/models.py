@@ -29,4 +29,5 @@ class Record(models.Model):
         json = {}
         json['price'] = self.price
         json['timestamp']  = self.timestamp
+        json['count'] = self.count
         return json

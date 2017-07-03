@@ -31,7 +31,6 @@ def get_ltc_price(request):
     start = objects.first()
     if (record):
         record_json = record.dumpJSON()
-        record_json["desc"] = str(record)
         json = {"latest" : record_json}
         json["high"] = arg['price__max']
         json["low"] = arg['price__min']
