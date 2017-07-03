@@ -19,7 +19,7 @@ def get_ltc_price(request):
     arg = objects.aggregate(Max('price'),Min('price'))
     count = 20
     if objects.count() < count:
-        count = arg.objects()
+        count = objects.count()
 
     latest_objects = objects[:count]
     count_sum = latest_objects.aggregate(Sum('count'))['count__sum']
