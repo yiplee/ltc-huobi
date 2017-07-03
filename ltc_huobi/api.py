@@ -20,8 +20,6 @@ def get_ltc_price(request):
     count = 20
     count_sum = 0
     # _list = []
-    if objects.count() < count:
-        count = objects.count()
 
     latest_objects = objects.reverse()[:count]
     for item in latest_objects:
