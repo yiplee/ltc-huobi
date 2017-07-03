@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.db.models import Max
 from django.db.models import Min
-from django.db.models import count
+from django.db.models import Count
 from django.db.models import Sum
 import datetime
 import time
