@@ -16,15 +16,14 @@ def get_ltc_price(request):
     date = datetime.date.today()
     today = time.mktime(date.timetuple()) + 16 * 60 * 60
     objects = Record.objects.filter(timestamp__gte = today)
-    max_price = objects.aggregate(Max('price'))
-    min_price = objects.aggregate(Min('price'))
+    arg = objects.aggregate(Max('price'),Min('price'))
 
     if (record):
         record = record.dumpJSON()
         json = {"record" : record}
-        json.update(max_price)
-        json.update(min_price)
-        json["time"] = today
+        json["max"] = arg['price__max']
+        json["min"] = arg['price__min']
+        json["today"] = today
         return JsonResponse(json)
     else:
         return HttpResponse('No Record')
