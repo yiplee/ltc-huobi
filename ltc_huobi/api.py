@@ -16,10 +16,10 @@ def get_ltc_price(request):
     date = datetime.date.today()
     today = time.mktime(date.timetuple()) + 16 * 60 * 60
     objects = Record.objects.filter(timestamp__gte = today).order_by('timestamp')
-    arg = objects.aggregate(Max('price'),Min('price'),Count('entry'))
+    arg = objects.aggregate(Max('price'),Min('price'))
     count = 20
-    if arg["entry__count"] < count:
-        count = arg["entry__count"]
+    if arg.count() < count:
+        count = arg.count()
 
     latest_objects = objects[:count]
     sum = latest_objects.aggregate(Sum('count'))
