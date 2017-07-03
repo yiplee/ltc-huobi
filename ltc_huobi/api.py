@@ -35,6 +35,7 @@ def get_ltc_price(request):
         json["open"] = start.price
         json["active"] = active
         json["sum"] = count_sum
+        json["sum_last"] = latest_objects.last().dumpJSON()
         return JsonResponse(json)
     else:
         return HttpResponse('No Record')
