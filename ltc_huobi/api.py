@@ -30,11 +30,11 @@ def get_ltc_price(request):
     record = objects.last()
     start = objects.first()
     if (record):
-        record = record.dumpJSON()
-        json = {"latest" : record}
+        record_json = record.dumpJSON()
+        record_json["desc"] = str(record)
+        json = {"latest" : record_json}
         json["high"] = arg['price__max']
         json["low"] = arg['price__min']
-        # json["today"] = today
         json["open"] = start.price
         json["active"] = active
         json["sum"] = count_sum
