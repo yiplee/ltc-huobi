@@ -14,7 +14,7 @@ def get_ltc_price(request):
     record = Record.objects.latest()
 
     date = datetime.date.today()
-    today = time.mktime(date.timetuple())
+    today = time.mktime(date.timetuple()) + 16 * 60 * 60
     objects = Record.objects.filter(timestamp__gte = today)
     max_price = objects.aggregate(Max('price'))
     min_price = objects.aggregate(Min('price'))
