@@ -20,11 +20,11 @@ def get_ltc_price(request):
     start = objects.earliest()
     if (record):
         record = record.dumpJSON()
-        json = {"record" : record}
-        json["max"] = arg['price__max']
-        json["min"] = arg['price__min']
+        json = {"latest" : record}
+        json["high"] = arg['price__max']
+        json["low"] = arg['price__min']
         # json["today"] = today
-        json["start"] = start.price
+        json["open"] = start.price
         return JsonResponse(json)
     else:
         return HttpResponse('No Record')
