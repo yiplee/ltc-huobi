@@ -24,6 +24,7 @@ def get_ltc_price(request):
         json = {"record" : record}
         json.update(max_price)
         json.update(min_price)
+        json["time"] = today
         return JsonResponse(json)
     else:
         return HttpResponse('No Record')
