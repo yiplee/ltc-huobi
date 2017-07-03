@@ -21,8 +21,8 @@ def get_ltc_price(request):
     if (record):
         record = record.dumpJSON()
         json = {"record" : record}
-        json += max_price
-        json += min_price
+        json.update(max_price)
+        json.update(min_price)
         return JsonResponse(json)
     else:
         return HttpResponse('No Record')
