@@ -19,12 +19,14 @@ def get_ltc_price(request):
     arg = objects.aggregate(Max('price'),Min('price'))
     count = 20
     count_sum = 0
+    _list = []
     if objects.count() < count:
         count = objects.count()
 
     latest_objects = objects[:count]
     for item in latest_objects:
         count_sum += item.count
+        _list.append(item.dumpJSON)
 
     active = count / count_sum
     record = objects.last()
@@ -38,6 +40,7 @@ def get_ltc_price(request):
         json["active"] = active
         json["sum"] = count_sum
         json["count"] = latest_objects.count()
+        json["list"] = _list
         return JsonResponse(json)
     else:
         return HttpResponse('No Record')
