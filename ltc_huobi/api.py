@@ -22,7 +22,7 @@ def get_ltc_price(request):
         count = arg.objects()
 
     latest_objects = objects[:count]
-    sum = latest_objects.aggregate(Sum('count'))
+    sum = latest_objects.aggregate(Sum('count'))['count_sum']
     active = count / sum
     record = objects.last()
     start = objects.first()
