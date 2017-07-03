@@ -2,6 +2,8 @@
 
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.db.models import Max
+from django.db.models import Min
 import datetime
 import time
 
