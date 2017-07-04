@@ -12,7 +12,7 @@ from ltc.models import Record
 
 # 数据库操作
 def get_ltc_price(request):
-    now = datetime.date.utcnow()
+    now = datetime.datetime.utcnow()
     today = datetime.datetime(now.year,now.month,now.day).timestamp()
     objects = Record.objects.filter(timestamp__gte = today).order_by('timestamp')
     arg = objects.aggregate(Max('price'),Min('price'))
