@@ -35,7 +35,7 @@ def get_ltc_price(request):
         json["low"] = arg['price__min']
         json["open"] = start.price
         json["active"] = active
-        # json["last"] = _list
+        json["today"] = today
         return JsonResponse(json)
     else:
         return HttpResponse('No Record')
