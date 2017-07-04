@@ -7,14 +7,13 @@ from django.db.models import Min
 from django.db.models import Count
 from django.db.models import Sum
 import datetime
-import time
 
 from ltc.models import Record
 
 # 数据库操作
 def get_ltc_price(request):
-    date = datetime.date.today()
-    today = time.mktime(date.timetuple()) + 16 * 60 * 60
+    now = datetime.date.utcnow()
+    today = datetime.datetime(now.year,now.month,now.day).timestamp()
     objects = Record.objects.filter(timestamp__gte = today).order_by('timestamp')
     arg = objects.aggregate(Max('price'),Min('price'))
     count = 20
