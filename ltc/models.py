@@ -25,7 +25,7 @@ class Record(models.Model):
         record.save()
         return record
 
-    def dumpJSON(self):
+    def dump_json(self):
         json = {}
         json['price'] = self.price
         json['timestamp']  = self.timestamp

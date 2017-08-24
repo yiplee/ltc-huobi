@@ -20,18 +20,16 @@ def get_ltc_price(request):
     arg = objects.aggregate(Max('price'),Min('price'))
     count = 20
     count_sum = 0
-    # _list = []
 
     latest_objects = objects.reverse()[:count]
     for item in latest_objects:
         count_sum += item.count
-        # _list.insert(0,item.dumpJSON())
 
     active = count / count_sum
     record = objects.last()
     start = objects.first()
     if (record):
-        record_json = record.dumpJSON()
+        record_json = record.dunp_json()
         json = {"latest" : record_json}
         json["high"] = arg['price__max']
         json["low"] = arg['price__min']
